@@ -96,10 +96,20 @@
         [Test]
         [TestCase("Groceries feb 29 !1", 1)]
         [TestCase("Groceries feb 29 !10", 10)]
+        [TestCase("Groceries feb 29 !100", 100)]
         public void PrioritySupplied_CanParsePriority(string input, int expectedPriority)
         {
             Task task = new Task(input, default(DateTime));
 
+            Expect(task.Priority, Is.EqualTo(expectedPriority));
+        }
+
+        [Test]
+        [TestCase("Groceries mar 15 !", 0)]
+        [TestCase("Groceries mar 15 !5x", 5)]
+        public void ImproperPrioritySupplied_DoesNotParsePriority(string input, int expectedPriority)
+        {
+            Task task = new Task(input, default(DateTime));
             Expect(task.Priority, Is.EqualTo(expectedPriority));
         }
     }

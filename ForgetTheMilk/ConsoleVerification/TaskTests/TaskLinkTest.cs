@@ -21,10 +21,10 @@ namespace ConsoleVerification
         [Test]
         public void CreateTask_DescriptionWithALink_SetLink()
         {
-            var input = "test http://www.google.com";
-            
+            var link = "http://www.google.com";
+            var input = "test " + link;
 
-            ILinkValidator mockValidator = Rhino.Mocks.MockRepository.GenerateMock<ILinkValidator>();
+            ILinkValidator mockValidator = MockRepository.GenerateMock<ILinkValidator>();
 
             Task task = new Task(input, default(DateTime), mockValidator);
 
